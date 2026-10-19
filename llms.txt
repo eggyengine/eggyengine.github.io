@@ -1,0 +1,30 @@
+# eggy
+
+> eggy is a game engine for Zig 0.16. A game is a Zig package: `src/main.zig` declares `pub const Game` with optional hooks the engine calls (`update`, `gameUi`, `editorUi`, ...), and `src/root.zig` declares `pub const Plugin`, which brings components, systems, editor panels and commands. eggy builds the package into a runtime for players (`zig build run-runtime`; desktop and the web) and a desktop editor for making the game (`zig build run`). Both run the same game and plugins.
+
+eggy is made of three modules: `eggy` (the engine a game imports: window, renderer, scene, plugins), `eggy_runtime` (runs the game as players see it) and `eggy_editor` (the game with editor tooling over it; desktop only). It is built on separate in-house Zig libraries, each usable without the engine. Every project is a Zig package added with `zig fetch --save git+https://github.com/eggyengine/<name>`.
+
+## Docs
+
+- [eggy documentation](https://eggyengine.github.io/eggy/): tutorials, how-to guides, reference and explanation for making games with eggy
+- [eggy API reference](https://eggyengine.github.io/eggy/api/): function contracts, ownership rules and errors, generated from eggy's source comments
+- [weeoui documentation](https://eggyengine.github.io/weeoui/): guide for the immediate-mode UI library the editor and game HUDs use
+
+## Engine libraries
+
+- [vitellus](https://eggyengine.github.io/vitellus/): native-first rendering hardware interface over Vulkan, DirectX 12 and WebGPU ([source](https://github.com/eggyengine/vitellus))
+- [weeoui](https://eggyengine.github.io/weeoui/): immediate-mode UI with docking panels, DevTools and screen-reader support through AccessKit; reached in games as `eggy.ui` ([source](https://github.com/eggyengine/weeoui))
+- [humpty](https://eggyengine.github.io/humpty/): physics engine ([source](https://github.com/eggyengine/humpty))
+- [clutch](https://eggyengine.github.io/clutch/): entity component system inspired by `bevy_ecs`; reached in games as `eggy.ecs` and `app.world` ([source](https://github.com/eggyengine/clutch))
+
+## Source
+
+- [eggy](https://github.com/eggyengine/eggy): the engine and editor; contributors clone with `git clone --recursive` and run `zig build run`
+- [eggyengine on GitHub](https://github.com/eggyengine): every project in the organization
+
+## Optional
+
+- [eggenvector](https://eggyengine.github.io/eggenvector/): vector and matrix maths on Zig's builtin SIMD types ([source](https://github.com/eggyengine/eggenvector))
+- [candler](https://github.com/eggyengine/candler): a windowing layer for libraries to integrate with; used by vitellus
+- [better-dynlib](https://github.com/eggyengine/better-dynlib): better support for loading dynamic libraries
+- [weeoui live demo](https://eggyengine.github.io/weeoui/demo/): the weeoui component gallery running in the browser (needs WebGPU)

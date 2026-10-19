@@ -1,0 +1,276 @@
+/* The weeoui "Yolk" theme (eggy/src/weeoui/src/types.zig), as CSS custom properties. */
+@font-face {
+  font-family: "Open Sans";
+  src: url("assets/fonts/OpenSans-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("assets/fonts/JetBrainsMono-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  --background: #faf7f2;
+  --foreground: #1c1915;
+  --card: #ffffff;
+  --primary: #f2b233;
+  --primary-foreground: #1c1915;
+  --secondary: #f3eee6;
+  --muted: #f3eee6;
+  --muted-foreground: #6b6358;
+  --accent: #fcefd2;
+  --accent-foreground: #7a4e00;
+  --border: #e8e1d6;
+  --input: #d8cebf;
+  --ring: #e6a019;
+
+  --radius: 10px;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+
+  /* weeoui's control text sizes; prose on the site is set larger for reading. */
+  --ui-text: 14px;
+  --ui-text-sm: 13px;
+  --measure: 38rem;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #15120f;
+    --foreground: #f3eee6;
+    --card: #1e1a16;
+    --primary: #f5be4a;
+    --primary-foreground: #1a1611;
+    --secondary: #29241f;
+    --muted: #29241f;
+    --muted-foreground: #a69c8f;
+    --accent: #3a2e14;
+    --accent-foreground: #f5c969;
+    --border: #2e2823;
+    --input: #433b32;
+    --ring: #f5be4a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --background: #15120f;
+  --foreground: #f3eee6;
+  --card: #1e1a16;
+  --primary: #f5be4a;
+  --primary-foreground: #1a1611;
+  --secondary: #29241f;
+  --muted: #29241f;
+  --muted-foreground: #a69c8f;
+  --accent: #3a2e14;
+  --accent-foreground: #f5c969;
+  --border: #2e2823;
+  --input: #433b32;
+  --ring: #f5be4a;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+/* Scroll thumbs in muted_foreground over the border color, as scroll.zig draws them. */
+html { -webkit-text-size-adjust: 100%; scrollbar-color: var(--muted-foreground) var(--border); }
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font: 16px/1.65 "Open Sans", system-ui, sans-serif;
+}
+
+/* weeoui renders a single regular weight; hierarchy comes from size and colour. */
+h1, h2, h3 { font-weight: 400; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: inherit; text-decoration: underline; text-decoration-color: var(--input); text-underline-offset: 3px; }
+a:hover { text-decoration-color: currentColor; }
+code, pre { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.875em; }
+
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: var(--radius-sm); }
+::selection { background: color-mix(in srgb, var(--ring) 35%, transparent); }
+
+/* The logo is pixel art: keep its pixels square at every size. */
+img[src$="icon.svg"], img[src$="icon.png"] { image-rendering: pixelated; }
+
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+/* Menu bar, like weeoui's menubar: ghost triggers at the default button size. */
+.titlebar { background: var(--card); border-bottom: 1px solid var(--border); }
+.titlebar .wrap { display: flex; align-items: center; gap: 4px; height: 60px; }
+.brand { display: flex; align-items: center; gap: 10px; margin-right: 20px; font-size: 18px; text-decoration: none; }
+.brand img { width: 32px; height: 32px; }
+.titlebar nav { display: flex; gap: 4px; flex: 1; min-width: 0; }
+
+/* Buttons: shadcn variants, drawn as weeoui's button.zig draws them. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--foreground);
+  font: inherit;
+  font-size: var(--ui-text);
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn svg { width: 16px; height: 16px; flex: none; }
+.btn-sm { height: 28px; padding: 0 8px; font-size: 12px; }
+.btn-icon { width: 36px; padding: 0; }
+.btn-icon svg { width: 18px; height: 18px; }
+/* The darker 1px lip under the fill gives the flat button some depth. */
+.btn-default {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--primary) 82%, black);
+}
+.btn-default:hover { background: color-mix(in srgb, var(--primary) 92%, black); }
+.btn-outline { background: var(--card); box-shadow: inset 0 0 0 1px var(--input); }
+.btn-outline:hover, .btn-ghost:hover { background: var(--accent); color: var(--accent-foreground); }
+.btn-ghost[aria-current="page"] { background: var(--accent); color: var(--accent-foreground); }
+
+/* Hero: a plain statement, then the editor itself. */
+.hero { padding: 88px 0 0; }
+.hero h1 { font-size: clamp(40px, 6.4vw, 72px); line-height: 1.05; letter-spacing: -0.025em; max-width: 14em; }
+.hero .lead { margin-top: 24px; max-width: var(--measure); font-size: 19px; color: var(--muted-foreground); }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 32px; }
+.actions .note { font-size: var(--ui-text); color: var(--muted-foreground); padding: 0 4px; }
+
+.shot { margin: 64px 0 0; }
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 0 var(--border), 0 24px 48px -24px rgb(28 25 21 / 0.35);
+}
+.shot figcaption { margin-top: 12px; font-size: var(--ui-text); color: var(--muted-foreground); }
+
+/* Sections share one rhythm: a heading column beside the content on wide screens. */
+.section { padding: 112px 0 0; }
+.section > .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 24px 64px; }
+.section h2 { font-size: 30px; line-height: 1.2; letter-spacing: -0.015em; }
+.section .body { display: grid; gap: 20px; max-width: 46rem; }
+.section .body > p { max-width: var(--measure); }
+.muted { color: var(--muted-foreground); }
+
+/* Code: a card with a weeoui tab strip (dock.zig: a muted track holding card-coloured tabs). */
+.code { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+.code .tabs { display: flex; gap: 2px; padding: 3px; margin: 6px; background: var(--muted); border-radius: var(--radius-lg); width: fit-content; max-width: calc(100% - 12px); overflow-x: auto; }
+.code .tab {
+  height: 24px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--muted-foreground);
+  font: inherit;
+  font-size: var(--ui-text-sm);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.code .tab:hover { color: var(--foreground); }
+.code .tab[aria-selected="true"] { background: var(--card); color: var(--foreground); box-shadow: inset 0 0 0 1px var(--border); }
+.code pre { margin: 0; padding: 14px 18px 18px; font-size: 13px; line-height: 1.7; overflow-x: auto; scrollbar-width: thin; }
+.code pre[hidden] { display: none; }
+.tok-k { color: var(--accent-foreground); }
+.tok-s { color: color-mix(in srgb, var(--ring) 70%, var(--foreground)); }
+.tok-c { color: var(--muted-foreground); }
+
+.commands { display: grid; grid-template-columns: max-content 1fr; gap: 6px 20px; margin: 0; }
+.commands dt code { color: var(--foreground); }
+.commands dd { margin: 0; color: var(--muted-foreground); }
+
+/* Project list: one row per package, name beside what it does, links at the end. */
+.projects { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
+.projects li { display: grid; grid-template-columns: 10rem minmax(0, 1fr) auto; gap: 4px 24px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid var(--border); }
+.projects h3 { font-size: 19px; }
+.projects p { color: var(--muted-foreground); }
+.projects .links { display: flex; gap: 2px; margin-right: -8px; }
+.more { font-size: var(--ui-text); }
+
+/* Projects page */
+.page-head { padding: 88px 0 0; }
+.page-head h1 { font-size: clamp(40px, 6vw, 64px); line-height: 1.05; letter-spacing: -0.025em; }
+.page-head .lead { margin-top: 20px; max-width: var(--measure); font-size: 19px; color: var(--muted-foreground); }
+.page-head ~ .section { padding-top: 72px; }
+
+/* Theme switch: the toggle.zig switch, a 40x22 track with an 18px white knob. */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 28px;
+  padding: 0 4px 0 8px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--muted-foreground);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.toggle:hover { background: var(--accent); color: var(--accent-foreground); }
+.toggle .track { position: relative; width: 40px; height: 22px; border-radius: 11px; background: var(--input); transition: background 0.15s; }
+.toggle .track::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  background: #fff;
+  transition: transform 0.15s;
+}
+.toggle[aria-checked="true"] .track { background: var(--primary); }
+.toggle[aria-checked="true"] .track::after { transform: translateX(18px); }
+
+.site-footer { margin-top: 128px; border-top: 1px solid var(--border); padding: 24px 0 32px; }
+.site-footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-size: var(--ui-text-sm); color: var(--muted-foreground); }
+.site-footer nav { display: flex; align-items: center; gap: 2px; margin-right: -4px; flex-wrap: wrap; }
+.site-footer .btn { color: var(--muted-foreground); }
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle .track, .toggle .track::after { transition: none; }
+}
+
+@media (max-width: 860px) {
+  .section { padding-top: 80px; }
+  .section > .wrap { grid-template-columns: minmax(0, 1fr); }
+  .projects li { grid-template-columns: minmax(0, 1fr) auto; }
+  .projects li p { grid-column: 1 / -1; grid-row: 2; }
+}
+
+@media (max-width: 560px) {
+  .wrap { padding: 0 16px; }
+  .hero, .page-head { padding-top: 48px; }
+  .hero .lead, .page-head .lead { font-size: 17px; }
+  .shot { margin-top: 40px; margin-right: -16px; }
+  .shot img { border-radius: var(--radius-lg) 0 0 var(--radius-lg); border-right: 0; }
+  .brand { margin-right: 8px; }
+  .commands { grid-template-columns: minmax(0, 1fr); }
+  .commands dd { margin-bottom: 8px; }
+}
+
+/* Icons: Lucide, as weeoui ships them, drawn from a sprite at the top of each page. */
+.sprite { display: none; }
+.i { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.btn-sm .i { width: 14px; height: 14px; }
+.btn-icon .i { width: 18px; height: 18px; }
+.projects h3 { display: flex; align-items: center; gap: 10px; }
+.projects h3 .i { width: 18px; height: 18px; color: var(--accent-foreground); }
+.projects h3 img.i { width: 16px; height: 16px; margin: 0 1px; }
+.projects .links .btn { gap: 6px; }

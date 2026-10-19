@@ -1,0 +1,9 @@
+# eggyengine.github.io and every project site under it (/eggy/, /weeoui/, ...).
+User-agent: *
+Allow: /
+
+Sitemap: https://eggyengine.github.io/sitemap.xml
+Sitemap: https://eggyengine.github.io/eggy/sitemap.xml
+Sitemap: https://eggyengine.github.io/weeoui/sitemap.xml
+Sitemap: https://eggyengine.github.io/vitellus/sitemap.xml
+Sitemap: https://eggyengine.github.io/clutch/sitemap.xml
