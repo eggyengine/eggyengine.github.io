@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>eggy: a game engine for Zig</title>
-  <meta name="description" content="eggy is a game engine for Zig. Your game is a Zig package that builds into a runtime for players and a desktop editor for making it.">
+  <meta name="description" content="eggy is a game engine for Zig. Your game is a Zig package that compiles its own editor from source.">
   <meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#15120f" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
@@ -41,15 +41,24 @@
     <section class="hero">
       <div class="wrap">
         <h1>eggy is a game engine for Zig.</h1>
-        <p class="lead">You write your game as a Zig package. eggy builds it into a runtime for your players and a desktop editor for making it, and both run the same code.</p>
+        <p class="lead">You write your game as a Zig package. It compiles its own editor from source, which you can change with plugins or by editing that source.</p>
         <div class="actions">
           <a class="btn btn-default" href="https://eggyengine.github.io/eggy/"><svg class="i" aria-hidden="true"><use href="#i-docs"/></svg>Read the docs</a>
           <a class="btn btn-outline" href="https://github.com/eggyengine/eggy"><svg class="i" aria-hidden="true"><use href="#i-github"/></svg>Source on GitHub</a>
           <span class="note">Needs Zig 0.17</span>
         </div>
+        <div class="code">
+          <div class="tabs" role="tablist" aria-label="Get started">
+            <button class="tab" role="tab" id="tab-sh" aria-controls="code-sh" aria-selected="true">Linux and macOS</button>
+            <button class="tab" role="tab" id="tab-ps" aria-controls="code-ps" aria-selected="false" tabindex="-1">Windows</button>
+          </div>
+<pre id="code-sh" role="tabpanel" aria-labelledby="tab-sh" data-lang="sh">curl -fsSL https://raw.githubusercontent.com/eggyengine/eggy/main/scripts/get-started.sh | bash</pre>
+<pre id="code-ps" role="tabpanel" aria-labelledby="tab-ps" data-lang="ps" hidden>irm https://raw.githubusercontent.com/eggyengine/eggy/main/scripts/get-started.ps1 | iex</pre>
+        </div>
+        <p class="note">The script is used because the editor is compiled with the game.</p>
         <figure class="shot">
           <img src="assets/editor.png" width="1280" height="800" alt="The eggy editor: a Hierarchy panel listing a Player entity, a Scene panel showing an orange cube on a grid with a move gizmo, and an Inspector panel editing the Player's Transform and Mesh components.">
-          <figcaption>The editor with a Player entity selected. Every panel is a weeoui dock tab you can split, float or pop out.</figcaption>
+          <figcaption>The editor with the sun entity selected. Every panel is a weeoui dock tab you can split, float or pop out.</figcaption>
         </figure>
       </div>
     </section>
@@ -58,7 +67,7 @@
       <div class="wrap">
         <h2>Your game is Zig code</h2>
         <div class="body">
-          <p>A project has a game in <code>src/main.zig</code>, whose hooks the engine calls each frame, and a plugin in <code>src/root.zig</code> that brings components, systems and editor panels. The editor sets the project up for you.</p>
+          <p>A project has a game in <code>src/main.zig</code>, whose hooks the engine calls each frame, and a plugin in <code>src/root.zig</code> that brings components, systems and editor panels. Keep both, or delete the one you do not need. The editor sets the project up for you.</p>
           <dl class="commands">
             <dt><code>zig build run</code></dt><dd>Opens your game in the editor.</dd>
             <dt><code>zig build run-runtime</code></dt><dd>Runs it as players see it, on the desktop or the web.</dd>

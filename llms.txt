@@ -1,6 +1,6 @@
 # eggy
 
-> eggy is a game engine for Zig 0.16. A game is a Zig package: `src/main.zig` declares `pub const Game` with optional hooks the engine calls (`update`, `gameUi`, `editorUi`, ...), and `src/root.zig` declares `pub const Plugin`, which brings components, systems, editor panels and commands. eggy builds the package into a runtime for players (`zig build run-runtime`; desktop and the web) and a desktop editor for making the game (`zig build run`). Both run the same game and plugins.
+> eggy is a game engine for Zig 0.17. It follows Zig's design principles and is for Zig developers who make games. A game is a Zig package: `src/main.zig` declares `pub const Game` with optional hooks the engine calls (`update`, `gameUi`, `editorUi`, ...), and `src/root.zig` declares `pub const Plugin`, which brings components, systems, editor panels and commands. Either file can be left out. eggy compiles the package's own editor from source (`zig build run`; change it with plugins or by editing that source) and a runtime for players (`zig build run-runtime`; desktop and the web). Both run the same game and plugins.
 
 eggy is made of three modules: `eggy` (the engine a game imports: window, renderer, scene, plugins), `eggy_runtime` (runs the game as players see it) and `eggy_editor` (the game with editor tooling over it; desktop only). It is built on separate in-house Zig libraries, each usable without the engine. Every project is a Zig package added with `zig fetch --save git+https://github.com/eggyengine/<name>`.
 

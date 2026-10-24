@@ -145,7 +145,10 @@ img[src$="icon.svg"], img[src$="icon.png"] { image-rendering: pixelated; }
 .hero h1 { font-size: clamp(40px, 6.4vw, 72px); line-height: 1.05; letter-spacing: -0.025em; max-width: 14em; }
 .hero .lead { margin-top: 24px; max-width: var(--measure); font-size: 19px; color: var(--muted-foreground); }
 .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 32px; }
-.actions .note { font-size: var(--ui-text); color: var(--muted-foreground); padding: 0 4px; }
+.note { font-size: var(--ui-text); color: var(--muted-foreground); }
+.actions .note { padding: 0 4px; }
+.hero .code { margin-top: 28px; }
+.hero .code + .note { margin-top: 10px; }
 
 .shot { margin: 64px 0 0; }
 .shot img {
